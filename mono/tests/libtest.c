@@ -8,6 +8,7 @@
 #include <time.h>
 #include <math.h>
 #include <setjmp.h>
+#include <signal.h>
 #include "../utils/mono-errno.h"
 #include "../utils/mono-compiler.h"
 
@@ -8006,6 +8007,18 @@ LIBTEST_API void STDCALL
 mono_test_MerpCrashUnhandledExceptionHook (void)
 {
 	g_assert_not_reached ();
+}
+
+LIBTEST_API void STDCALL
+mono_test_MerpCrashSignalTerm (void)
+{
+	raise (SIGTERM);
+}
+
+LIBTEST_API void STDCALL
+mono_test_MerpCrashSignalQuit (void)
+{
+	raise (SIGQUIT);
 }
 
 #ifdef __cplusplus

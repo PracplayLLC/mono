@@ -38,6 +38,8 @@ class C
 			Crashers.Add(new Tuple<String, Action> ("MerpCrashSnprintf", MerpCrashSnprintf));
 			Crashers.Add(new Tuple<String, Action> ("MerpCrashDomainUnload", MerpCrashDomainUnload));
 			Crashers.Add(new Tuple<String, Action> ("MerpCrashUnbalancedGCSafe", MerpCrashUnbalancedGCSafe));
+			Crashers.Add(new Tuple<String,Action>  ("MerpCrashSignalTerm", MerpCrashSignalTerm));
+			Crashers.Add(new Tuple<String,Action>  ("MerpCrashSignalQuit", MerpCrashSignalQuit));
 		}
 
 		public static void 
@@ -112,6 +114,24 @@ class C
 
 		[DllImport("libtest")]
 		public static extern void mono_test_MerpCrashUnhandledExceptionHook ();
+
+		[DllImport("libtest")]
+		public static extern void mono_test_MerpCrashSignalTerm ();
+
+		public static void
+		MerpCrashSignalTerm ()
+		{
+			mono_test_MerpCrashSignalTerm ();
+		}
+
+		[DllImport("libtest")]
+		public static extern void mono_test_MerpCrashSignalQuit ();
+
+		public static void
+		MerpCrashSignalQuit ()
+		{
+			mono_test_MerpCrashSignalQuit ();
+		}
 
 		public static void 
 		MerpCrashUnhandledExceptionHook ()
